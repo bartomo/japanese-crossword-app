@@ -1,0 +1,161 @@
+.hiragana-keyboard {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.keyboard-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.keyboard-header h3 {
+  color: #fff;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.keyboard-instruction {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.keyboard-instruction.with-word {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.character-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.legend-item {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.legend-item.hiragana {
+  background: rgba(33, 150, 243, 0.2);
+  color: #2196f3;
+  border: 1px solid rgba(33, 150, 243, 0.4);
+}
+
+.legend-item.katakana {
+  background: rgba(255, 152, 0, 0.2);
+  color: #ff9800;
+  border: 1px solid rgba(255, 152, 0, 0.4);
+}
+
+.keyboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+  gap: 0.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.keyboard-char {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.keyboard-char:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #4caf50;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+}
+
+.keyboard-char:active {
+  transform: translateY(0);
+  background: rgba(76, 175, 80, 0.4);
+}
+
+.keyboard-char.dragging {
+  opacity: 0.5;
+  transform: scale(0.9);
+}
+
+/* ドラッグ中のスタイル */
+.keyboard-char:active {
+  cursor: grabbing;
+}
+
+/* 文字種別による色分け */
+.keyboard-char.hiragana {
+  background: rgba(33, 150, 243, 0.2);
+  border-color: rgba(33, 150, 243, 0.4);
+}
+
+.keyboard-char.katakana {
+  background: rgba(255, 152, 0, 0.2);
+  border-color: rgba(255, 152, 0, 0.4);
+}
+
+.keyboard-char.hiragana:hover {
+  background: rgba(33, 150, 243, 0.3);
+  border-color: #2196f3;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+}
+
+.keyboard-char.katakana:hover {
+  background: rgba(255, 152, 0, 0.3);
+  border-color: #ff9800;
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .keyboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
+    gap: 0.3rem;
+    max-width: 400px;
+  }
+  
+  .keyboard-char {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .keyboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+    max-width: 300px;
+  }
+  
+  .keyboard-char {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+  
+  .hiragana-keyboard {
+    padding: 1rem;
+  }
+} 

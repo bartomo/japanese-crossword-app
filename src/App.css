@@ -1,0 +1,125 @@
+.App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+main {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.crossword-grid {
+  display: grid;
+  gap: 2px;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.crossword-cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.crossword-cell:hover {
+  background-color: #e3f2fd;
+}
+
+.crossword-cell.filled {
+  background-color: #4caf50;
+  color: white;
+}
+
+.crossword-cell.blocked {
+  background-color: #333;
+  cursor: default;
+}
+
+.crossword-cell.selected {
+  background-color: #2196f3;
+  color: white;
+}
+
+.clues-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.clues-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.clues-section h3 {
+  margin-top: 0;
+  color: #fff;
+  border-bottom: 2px solid #fff;
+  padding-bottom: 0.5rem;
+}
+
+.clue-item {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clue-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.clue-item.completed {
+  background-color: rgba(76, 175, 80, 0.3);
+  text-decoration: line-through;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .clues-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .crossword-cell {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  
+  main {
+    padding: 1rem;
+  }
+} 
