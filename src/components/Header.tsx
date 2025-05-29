@@ -44,6 +44,12 @@ const Header: React.FC = () => {
           >
             {t('header.settings')}
           </Link>
+          <Link 
+            to="/vocabulary" 
+            className={`nav-link ${isActive('/vocabulary') ? 'active' : ''}`}
+          >
+            語彙管理
+          </Link>
         </nav>
       </div>
     </header>

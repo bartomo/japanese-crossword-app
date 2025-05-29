@@ -106,6 +106,38 @@ const Settings: React.FC = () => {
               <option value="both">{t('options.bothCharacters')}</option>
             </select>
           </div>
+
+          <div className="setting-item">
+            <div className="setting-info">
+              <h3>ヒント表示方法</h3>
+              <p>クロスワードのヒントを英語単語か日本語説明のどちらで表示するかを選択します</p>
+            </div>
+            <select
+              value={settings.hintType}
+              onChange={(e) => handleSettingChange('hintType', e.target.value)}
+              className="setting-select"
+            >
+              <option value="english">英語単語</option>
+              <option value="description">日本語説明</option>
+              <option value="both">両方表示</option>
+            </select>
+          </div>
+
+          <div className="setting-item">
+            <div className="setting-info">
+              <h3>ヒント言語</h3>
+              <p>説明文を日本語と英語のどちらで表示するかを選択します</p>
+            </div>
+            <select
+              value={settings.hintLanguage}
+              onChange={(e) => handleSettingChange('hintLanguage', e.target.value)}
+              className="setting-select"
+            >
+              <option value="ja">日本語（ふりがな付き）</option>
+              <option value="en">英語</option>
+              <option value="auto">自動選択</option>
+            </select>
+          </div>
         </div>
 
         <div className="settings-section">
@@ -165,8 +197,11 @@ const Settings: React.FC = () => {
               <h3>{t('settings.resetProgress')}</h3>
               <p>{t('settings.resetProgressDesc')}</p>
             </div>
-            <button onClick={resetProgress} className="reset-button">
-              {t('settings.reset')}
+            <button 
+              onClick={resetProgress}
+              className="danger-btn"
+            >
+              {t('settings.resetButton')}
             </button>
           </div>
         </div>

@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import CrosswordGame from './pages/CrosswordGame'
 import Progress from './pages/Progress'
 import Settings from './pages/Settings'
+import VocabularyManager from './pages/VocabularyManager'
 import { SettingsProvider, useSettings } from './contexts/SettingsContext'
 import { LanguageProvider } from './contexts/LanguageContext'
 import './App.css'
@@ -46,6 +47,7 @@ const AppContent: React.FC = () => {
                 } 
               />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/vocabulary" element={<VocabularyManager />} />
             </Routes>
           </main>
         </div>

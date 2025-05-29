@@ -14,9 +14,17 @@ export class CrosswordGenerator {
   private placedWords: PlacedWord[] = [];
   private clueNumber = 1;
   private actualGridSize = { rows: 0, cols: 0 };
+  private hintType: 'english' | 'description' | 'both';
+  private hintLanguage: 'ja' | 'en' | 'auto';
 
-  constructor(maxGridSize: number = 20) {
+  constructor(
+    maxGridSize: number = 20, 
+    hintType: 'english' | 'description' | 'both' = 'description',
+    hintLanguage: 'ja' | 'en' | 'auto' = 'ja'
+  ) {
     this.maxGridSize = maxGridSize;
+    this.hintType = hintType;
+    this.hintLanguage = hintLanguage;
     this.grid = Array(maxGridSize).fill(null).map(() => Array(maxGridSize).fill(''));
   }
 
@@ -205,7 +213,7 @@ export class CrosswordGenerator {
         startRow: placedWord.startRow,
         startCol: placedWord.startCol,
         direction: placedWord.direction,
-        clue: `${placedWord.clueNumber}. ${placedWord.word.english}`,
+        clue: this.generateClue(placedWord.word, placedWord.clueNumber),
         isCompleted: false,
         cells: wordCells
       });
@@ -219,6 +227,37 @@ export class CrosswordGenerator {
       words: crosswordWords,
       cells
     };
+  }
+
+  private generateClue(word: Word, clueNumber: number): string {
+    const numberPrefix = `${clueNumber}. `;
+    
+    // 説明文の言語を決定
+    const getDescription = (): string => {
+      switch (this.hintLanguage) {
+        case 'ja':
+          return word.descriptionJa || word.descriptionEn || word.english;
+        case 'en':
+          return word.descriptionEn || word.descriptionJa || word.english;
+        case 'auto':
+          // 自動選択：日本語優先、なければ英語
+          return word.descriptionJa || word.descriptionEn || word.english;
+        default:
+          return word.descriptionJa || word.descriptionEn || word.english;
+      }
+    };
+    
+    switch (this.hintType) {
+      case 'english':
+        return `${numberPrefix}${word.english}`;
+      case 'description':
+        return `${numberPrefix}${getDescription()}`;
+      case 'both':
+        const description = getDescription();
+        return `${numberPrefix}${description} (${word.english})`;
+      default:
+        return `${numberPrefix}${word.english}`;
+    }
   }
 }
 

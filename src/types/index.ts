@@ -3,6 +3,8 @@ export interface Word {
   japanese: string;
   hiragana: string;
   english: string;
+  descriptionJa?: string; // 日本語説明（漢字にふりがな付き）
+  descriptionEn?: string; // 英語説明
   category: string;
   jlptLevel: 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
   difficulty: number; // 1-5
@@ -59,4 +61,6 @@ export interface GameSettings {
   language: 'en' | 'ja';
   inputMethod: 'keyboard' | 'dragdrop' | 'both';
   characterType: 'hiragana' | 'katakana' | 'both';
+  hintType: 'english' | 'description' | 'both'; // ヒント表示方法
+  hintLanguage: 'ja' | 'en' | 'auto'; // ヒント言語設定
 } 

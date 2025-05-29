@@ -29,7 +29,9 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
     theme: 'dark',
     language: 'ja',
     inputMethod: 'both',
-    characterType: 'both'
+    characterType: 'both',
+    hintType: 'description',
+    hintLanguage: 'ja'
   });
 
   const updateSettings = (newSettings: Partial<GameSettings>) => {

@@ -3,7 +3,8 @@ import { CrosswordPuzzle } from '../types';
 import { CrosswordGenerator } from '../utils/crosswordGenerator';
 import CrosswordGrid from '../components/CrosswordGrid';
 import { useLanguage } from '../contexts/LanguageContext';
-import { getRandomWords } from '../data/jlptN5Words';
+import { useSettings } from '../contexts/SettingsContext';
+import { jlptN5Words } from '../data/jlptN5Words';
 import './CrosswordGame.css';
 
 interface CrosswordGameProps {
@@ -13,6 +14,11 @@ interface CrosswordGameProps {
   characterType?: 'hiragana' | 'katakana' | 'both';
 }
 
+const getRandomWords = (count: number) => {
+  const shuffled = [...jlptN5Words].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+};
+
 const CrosswordGame: React.FC<CrosswordGameProps> = ({ 
   level, 
   onWordComplete, 
@@ -20,6 +26,7 @@ const CrosswordGame: React.FC<CrosswordGameProps> = ({
   characterType = 'both'
 }) => {
   const { t } = useLanguage();
+  const { settings } = useSettings();
   const [puzzle, setPuzzle] = useState<CrosswordPuzzle | null>(null);
   const [score, setScore] = useState(0);
   const [completedWords, setCompletedWords] = useState(0);
@@ -32,7 +39,7 @@ const CrosswordGame: React.FC<CrosswordGameProps> = ({
     setShowCongratulations(false);
     
     setTimeout(() => {
-      const generator = new CrosswordGenerator();
+      const generator = new CrosswordGenerator(20, settings.hintType, settings.hintLanguage);
       const selectedWords = getRandomWords(6); // レベルに応じて6語を選択
       const newPuzzle = generator.generatePuzzle(selectedWords);
       setPuzzle(newPuzzle);
@@ -45,7 +52,7 @@ const CrosswordGame: React.FC<CrosswordGameProps> = ({
 
   useEffect(() => {
     generateNewPuzzle();
-  }, [level]);
+  }, [level, settings.hintType, settings.hintLanguage]);
 
   const handleWordComplete = (wordId: string) => {
     setScore(prev => prev + 10);
